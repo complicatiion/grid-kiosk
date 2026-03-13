@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+
+ <!--
+This is a private project created to support personal administration workflows.
+The work on this project was not commissioned by any employer and was not carried out during company working hours.
+Copyright remains with the creator and author of this software.
+-->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>| · · · GRID KIOSK · · · |</title>
+
+  <!-- Favicon: overridden via settings (URL or upload) -->
+  <link id="faviconLink" rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <!-- Material-/Bootstrap-inspired theme (local, offline-capable) -->
+  <link rel="stylesheet" href="assets/css/material.css">
+
+  <!-- App logic -->
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <!--
+    Toolbar: fixed at the top, contains
+    - Logo (toggleable + direct upload here)
+    - Title/subtitle (live editable)
+    - Buttons: Reload, Fullscreen, Layout, Settings
+    - Shortcut hint
+    Use direct UI wording throughout.
+  -->
+  
+	<!-- Logo upload PNG button ON (enabled) -->
+<!--
+	  <header class="toolbar surface-elevated" id="toolbar">
+    <div class="toolbar-left">
+      <label class="logo-wrap" title="Upload logo (PNG) – takes priority over logo URL">
+        <input id="logoFile" type="file" accept="image/png,image/webp,image/jpeg" hidden>
+        <img id="logoImg" class="logo" src="assets/img/logo2.png" alt="Logo">
+        <button id="logoUploadBtn" class="btn ghost xs" type="button" aria-label="Upload logo">PNG</button>
+      </label>
+-->
+	  
+	<!-- Logo upload PNG button OFF (disabled) -->
+	
+	<header class="toolbar surface-elevated" id="toolbar">
+	<div class="toolbar-left">
+		<label class="logo-wrap" title="Upload logo (PNG) – takes priority over logo URL">
+		<input id="logoFile" type="file" accept="image/png,image/webp,image/jpeg" hidden>
+		<img id="logoImg" class="logo" src="assets/img/logo2.png" alt="Logo">
+		<button id="logoUploadBtn" class="btn ghost xs" type="button" aria-label="Upload logo">PNG</button>
+		</label>
+	  
+	
+	  <!--
+       <!-- Fixed static logo (no upload / no URL) -->
+      <!--<img id="logoImg" class="logo" src="assets/img/logo1.png" alt="Logo">
+    </div> 
+	-->
+	
+	
+      <!-- Logo URL Button AN (Button aktiviert)-->
+      <details class="details-inline" id="logoUrlDetails" hidden inert aria-hidden="true">
+	  <!-- change the line above to <details class="details-inline"> to show the logo URL button again --> 
+        <summary class="btn ghost xs">Logo URL</summary>
+        <input id="logoUrlInput" class="input sm" type="url" placeholder=".\assets\img\logo1.png">
+        <label class="switch sm" title="Show/hide logo">
+          <input id="showLogoSwitch" type="checkbox" checked>
+          <span>Show logo</span>
+        </label>
+      </details>
+    </div>
+
+
+	<!-- Logo URL button OFF (button disabled) -->
+<!--	
+<details class="details-inline" id="logoUrlDetails" hidden inert aria-hidden="true">
+  <summary class="btn ghost xs">Logo URL</summary>
+  <input id="logoUrlInput" class="input sm" type="url" placeholder=".\assets\img\logo1.png">
+  <label class="switch sm" title="Show/hide logo">
+    <input id="showLogoSwitch" type="checkbox" checked>
+    <span>Show logo</span>
+  </label>
+</details>
+-->
+
+    <!-- Title & description (live) -->
+    <div class="title-wrap">
+      <input id="titleInput" class="title-input" type="text" placeholder="GRID KIOSK">
+      <input id="subtitleInput" class="subtitle-input" type="text" placeholder="Short description …">
+    </div>
+
+    <div class="toolbar-right">
+      <button id="reloadAllBtn" class="btn" title="Reload all (R)">Reload</button>
+      <button id="fullscreenBtn" class="btn" title="Fullscreen (F)">Fullscreen</button>
+	  
+	<!-- NEW: Toggle UI (#) -->
+	<!--<button id="toggleUiBtn" class="btn" title="Hide UI (#)" aria-pressed="true">Hide UI</button>-->
+	
+      <div class="layout-group">
+        <button id="layout4Btn" class="btn ghost" title="4 panes (2×2)">4</button>
+        <button id="layout2HBtn" class="btn ghost" title="2 side by side">2↔</button>
+        <button id="layout2VBtn" class="btn ghost" title="2 stacked">2↕</button>
+      </div>
+
+      <button id="settingsBtn" class="btn outlined" title="Open settings">⚙︎</button>
+
+		<!-- Adjust the toolbar shortcut description in this line · · · -->
+      <div class="shortcuts"><b>SHORTCUTS:</b> Key <b>1–4</b> = Pane 1-4 | <b>#</b> = Toggle UI</div>
+    </div>
+  </header>
+
+  <!-- Hint shown when the UI is hidden -->
+  <div id="uiHiddenHint" class="ui-hidden-hint" hidden>UI hidden – press #</div>
+
+  <!-- Grid: dynamic 2×2 or 2-column / 2-row -->
+  <main id="grid" class="grid grid-4">
+    <!-- Pane 1 -->
+    <section class="pane" data-index="0">
+      <header class="pane-bar" title="Right click: Quick edit · Double click: Edit">
+        <h2 class="pane-title">Pane 1</h2>
+        <div class="pane-actions">
+          <button class="pane-edit btn ghost xs" title="Edit URL & interval (Pencil)">✏️</button>
+        </div>
+      </header>
+      <div class="pane-body">
+        <iframe class="pane-frame" src="https://www.example.com/" loading="lazy" referrerpolicy="no-referrer"></iframe>
+        <div class="loading" hidden>Loading …</div>
+      </div>
+      <footer class="pane-meta">
+        <span class="host">example.com</span>
+        <span class="meta-sep">·</span>
+        <span class="interval" data-scope="pane">10s</span>
+      </footer>
+    </section>
+
+    <!-- Pane 2 -->
+    <section class="pane" data-index="1">
+      <header class="pane-bar" title="Right click: Quick edit · Double click: Edit">
+        <h2 class="pane-title">Pane 2</h2>
+        <div class="pane-actions">
+          <button class="pane-edit btn ghost xs" title="Edit URL & interval (Pencil)">✏️</button>
+        </div>
+      </header>
+      <div class="pane-body">
+        <iframe class="pane-frame" src="https://www.example.com/" loading="lazy" referrerpolicy="no-referrer"></iframe>
+        <div class="loading" hidden>Loading …</div>
+      </div>
+      <footer class="pane-meta">
+        <span class="host">wikipedia.org</span>
+        <span class="meta-sep">·</span>
+        <span class="interval" data-scope="pane">10s</span>
+      </footer>
+    </section>
+
+    <!-- Pane 3 -->
+    <section class="pane" data-index="2">
+      <header class="pane-bar" title="Right click: Quick edit · Double click: Edit">
+        <h2 class="pane-title">Pane 3</h2>
+        <div class="pane-actions">
+          <button class="pane-edit btn ghost xs" title="Edit URL & interval (Pencil)">✏️</button>
+        </div>
+      </header>
+      <div class="pane-body">
+        <iframe class="pane-frame" src="https://www.example.com/" loading="lazy" referrerpolicy="no-referrer"></iframe>
+        <div class="loading" hidden>Loading …</div>
+      </div>
+      <footer class="pane-meta">
+        <span class="host">ycombinator.com</span>
+        <span class="meta-sep">·</span>
+        <span class="interval" data-scope="pane">10s</span>
+      </footer>
+    </section>
+
+    <!-- Pane 4 -->
+    <section class="pane" data-index="3">
+      <header class="pane-bar" title="Right click: Quick edit · Double click: Edit">
+        <h2 class="pane-title">Pane 4</h2>
+        <div class="pane-actions">
+          <button class="pane-edit btn ghost xs" title="Edit URL & interval (Pencil)">✏️</button>
+        </div>
+      </header>
+      <div class="pane-body">
+        <iframe class="pane-frame" src="https://www.example.com/" loading="lazy" referrerpolicy="no-referrer"></iframe>
+        <div class="loading" hidden>Loading …</div>
+      </div>
+      <footer class="pane-meta">
+        <span class="host">bing.com</span>
+        <span class="meta-sep">·</span>
+        <span class="interval" data-scope="pane">10s</span>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Modals -->
+  <dialog id="paneDialog" class="dialog">
+    <form method="dialog" class="dialog-body">
+      <h3>Edit pane</h3>
+      <p class="small">First the URL, then an optional custom refresh interval (seconds, 0 = use global).</p>
+      <label>URL
+        <input id="paneUrlInput" class="input" type="url" required placeholder="https://…">
+      </label>
+      <label>Refresh (sec.)
+        <input id="paneIntervalInput" class="input" type="number" min="0" step="1" value="0">
+      </label>
+      <menu class="dialog-actions">
+        <button value="cancel" class="btn ghost">Cancel</button>
+        <button id="paneTestBtn" type="button" class="btn ghost">Test</button>
+        <button id="paneSaveBtn" value="default" class="btn">Save</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog" class="dialog wide">
+    <form method="dialog" class="dialog-body">
+      <h3>Settings</h3>
+
+      <section class="section">
+        <h4>Layout</h4>
+        <div class="layout-options">
+          <label class="radio">
+            <input type="radio" name="layout" value="grid-4" checked>
+            <span>4 (2×2)</span>
+            <div class="preview preview-4" aria-hidden="true"></div>
+          </label>
+          <label class="radio">
+            <input type="radio" name="layout" value="grid-2h">
+            <span>2 side by side</span>
+            <div class="preview preview-2h" aria-hidden="true"></div>
+          </label>
+          <label class="radio">
+            <input type="radio" name="layout" value="grid-2v">
+            <span>2 stacked</span>
+            <div class="preview preview-2v" aria-hidden="true"></div>
+          </label>
+        </div>
+        <div class="pair-row">
+          <label>Pair for 2-pane layout
+            <select id="pairSelect" class="input">
+              <option value="0-1">Pane 1 & 2</option>
+              <option value="2-3">Pane 3 & 4</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+    <!-- This section defines the globalIntervalInput for the website reload timer. min = 0 means no reload interval. Standard min = 3 means at least 3 seconds. Default value="10" means 10 seconds. -->
+      <section class="section">
+        <h4>Auto Refresh</h4>
+        <div class="grid-rows">
+          <label>Global interval (seconds)
+            <input id="globalIntervalInput" class="input" type="number" min="0" step="1" value="10">
+          </label>
+          <label>
+            <input id="pauseHiddenSwitch" type="checkbox" checked>
+            Visibility logic enabled: pause hidden panes
+          </label>
+        </div>
+      </section>
+
+      <section class="section">
+        <h4>Website URLs & per-pane intervals</h4>
+        <div class="table">
+          <div class="row header"><div>#</div><div>URL</div><div>Refresh (sec., 0 = global)</div></div>
+          <div class="row"><div>1</div><div><input class="input paneUrl" data-index="0" type="url"></div><div><input class="input paneInt" data-index="0" type="number" min="0" step="1"></div></div>
+          <div class="row"><div>2</div><div><input class="input paneUrl" data-index="1" type="url"></div><div><input class="input paneInt" data-index="1" type="number" min="0" step="1"></div></div>
+          <div class="row"><div>3</div><div><input class="input paneUrl" data-index="2" type="url"></div><div><input class="input paneInt" data-index="2" type="number" min="0" step="1"></div></div>
+          <div class="row"><div>4</div><div><input class="input paneUrl" data-index="3" type="url"></div><div><input class="input paneInt" data-index="3" type="number" min="0" step="1"></div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h4>Logo & Favicon</h4>
+        <div class="grid-rows">
+          <label>Logo URL
+            <input id="logoUrlInputSettings" class="input" type="url" placeholder="https://…/logo.png">
+          </label>
+          <div class="row-inline">
+            <label class="switch">
+              <input id="showLogoSwitchSettings" type="checkbox" checked>
+              <span>Show logo</span>
+            </label>
+            <button id="logoUploadBtnSettings" class="btn ghost" type="button">Upload logo (PNG)</button>
+          </div>
+          <label>Favicon URL
+            <input id="faviconUrlInput" class="input" type="url" placeholder="https://…/favicon.png">
+          </label>
+          <button id="faviconUploadBtn" class="btn ghost" type="button">Upload favicon (PNG)</button>
+        </div>
+      </section>
+
+      <section class="section">
+        <h4>Font</h4>
+        <p class="small">You can include a font via URL <em>or</em> upload it as a file. Uploads are stored locally.</p>
+        <label>Font URL (.woff2 preferred)
+          <input id="fontUrlInput" class="input" type="url" placeholder="https://…/deine.woff2">
+        </label>
+        <button id="fontUploadBtn" class="btn ghost" type="button">Upload font</button>
+        <div id="fontStatus" class="small muted"></div>
+      </section>
+
+      <menu class="dialog-actions">
+        <button value="cancel" class="btn ghost">Close</button>
+        <button id="saveSettingsBtn" value="default" class="btn">Save</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <!-- Minimal upload form (hidden) so files can be selected quickly via the toolbar -->
+  <form id="hiddenUploadForm" hidden></form>
+
+</body>
+</html>

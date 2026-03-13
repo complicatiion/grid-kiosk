@@ -1,0 +1,20 @@
+# make executeable
+chmod +x start-kiosk.sh
+
+# Optional: systemd User-Service (Autostart Login)
+# ~/.config/systemd/user/kiosk.service
+[Unit]
+Description=GRID Kiosk Browser
+After=graphical-session.target
+
+[Service]
+ExecStart=%h/start-kiosk.sh
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=default.target
+
+# activate:
+systemctl --user daemon-reload
+systemctl --user enable --now kiosk.service
