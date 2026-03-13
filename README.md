@@ -14,10 +14,10 @@
 
 ### > The preview images below assume the `README.md` is placed in the project root and the images are stored in `assets/preview/`.
 
-![Preview 1](assets/preview/prev1.jpg)
-![Preview 2](assets/preview/prev2.jpg)
-![Preview 3](assets/preview/prev3.jpg)
-![Preview 4](assets/preview/prev4.jpg)
+![Preview 1](grid-kiosk/assets/preview/prev1.jpg)
+![Preview 2](grid-kiosk/assets/preview/prev2.jpg)
+![Preview 3](grid-kiosk/assets/preview/prev3.jpg)
+![Preview 4](grid-kiosk/assets/preview/prev4.jpg)
 
 ## Main Features
 
